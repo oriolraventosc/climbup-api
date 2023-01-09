@@ -4,6 +4,7 @@ const routes = {
   register: "/register",
   climbingWalls: "/climbingWalls",
   loadAllClimbingWalls: "/loadAllClimbingWalls",
+  debug: process.env.DEBUG,
 };
 
 export default routes;
