@@ -16,12 +16,12 @@ export const loadAllClimbingWalls = async (
     const climbingWalls = await ClimbingWall.find();
 
     if (climbingWalls.length < 1) {
-      const error = new CustomError(
-        "0 climbing walls found!",
-        204,
-        "0 climbing walls found!"
-      );
-      next(error);
+      res.status(200).json({
+        privateClimbingWalls: [],
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
       return;
     }
 

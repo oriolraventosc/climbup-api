@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import ClimbingWall from "../../../database/models/climbingWalls/climbingWalls";
-import climbingWall from "../../../mocks/climbingWalls/climbingWall";
+import climbingWallMock from "../../../mocks/climbingWalls/climbingWall";
 import CustomError from "../../customError/customError";
 import { loadAllClimbingWalls } from "./climbingWallsController";
 
@@ -16,7 +16,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       const req: Partial<Request> = {};
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue(climbingWall);
+      ClimbingWall.find = jest.fn().mockReturnValue(climbingWallMock);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -29,13 +29,9 @@ describe("Given a loadAllClimbingWalls controller", () => {
   });
 
   describe("When it has 0 climbing walls", () => {
-    test("Then it should call it's next method with an error", async () => {
+    test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {};
-      const error = new CustomError(
-        "0 climbing walls found!",
-        204,
-        "0 climbing walls found!"
-      );
+      const status = 200;
 
       ClimbingWall.find = jest.fn().mockReturnValue([]);
 
@@ -45,7 +41,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
         next as NextFunction
       );
 
-      expect(next).toHaveBeenCalledWith(error);
+      expect(res.status).toHaveBeenCalledWith(status);
     });
   });
 

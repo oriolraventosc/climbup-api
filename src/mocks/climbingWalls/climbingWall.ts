@@ -1,4 +1,4 @@
-const climbingWall = {
+const climbingWallMock = {
   owner: "63bc33e6b4193dbdf0f95246",
   name: "Drac de Pedra",
   city: "Rubí",
@@ -13,4 +13,4 @@ const climbingWall = {
   website: "www.dracdepedra.com",
 };
 
-export default climbingWall;
+export default climbingWallMock;
