@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const contactSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -9,17 +9,13 @@ const contactSchema = new Schema({
     type: String,
     required: true,
   },
-  telephone: {
-    type: Number,
-    required: false,
-  },
-  message: {
+  password: {
     type: String,
     required: true,
   },
 });
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-const Contact = model("Contact", contactSchema, "contacts");
+const User = model("User", userSchema, "users");
 
-export default Contact;
+export default User;
