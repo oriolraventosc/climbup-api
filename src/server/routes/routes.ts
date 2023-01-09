@@ -1,8 +1,9 @@
 const routes = {
-  projectsRouter: "/projects",
-  loadProjects: "/loadAllProjects",
-  contactsRouter: "/contacts",
-  addContact: "/add",
+  users: "users",
+  login: "/login",
+  register: "/register",
+  climbingWalls: "/climbingWalls",
+  loadAllClimbingWalls: "/loadAllClimbingWalls",
 };
 
 export default routes;
