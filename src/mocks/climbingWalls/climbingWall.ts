@@ -11,6 +11,7 @@ const climbingWallMock = {
   schedule: "Lunes - Sábado de 10:00 a 22:00",
   activities: ["Grupos", "Escuela de escalada"],
   website: "www.dracdepedra.com",
+  picture1: "dracdepedra.jpg",
 };
 
 export default climbingWallMock;

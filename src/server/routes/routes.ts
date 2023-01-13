@@ -1,5 +1,5 @@
 const routes = {
-  users: "users",
+  users: "/users",
   login: "/login",
   register: "/register",
   climbingWalls: "/climbingWalls",
