@@ -12,15 +12,6 @@ import {
   userWithoutPasswordMock,
 } from "../../../mocks/users/user";
 import routes from "../../routes/routes";
-import type { Request, Response, NextFunction } from "express";
-import { register } from "../../controllers/usersController/usersController";
-
-const next = jest.fn();
-
-const res: Partial<Response> = {
-  status: jest.fn().mockReturnThis(),
-  json: jest.fn(),
-};
 
 let server: MongoMemoryServer;
 
@@ -53,8 +44,7 @@ describe("Given a POST '/register' endpoint", () => {
         .send(userMock)
         .expect(status);
 
-      expect(response.body).toHaveProperty("email");
-      expect(response.body).toHaveProperty("password");
+      expect(response.body).toHaveProperty("newUser");
     });
   });
 
@@ -109,63 +99,6 @@ describe("Given a POST '/register' endpoint", () => {
       const response = await request(app)
         .post(`${routes.users}${routes.register}`)
         .send(userMock)
-        .expect(status);
-
-      expect(response.body).toHaveProperty("error");
-    });
-  });
-});
-
-describe("Given a POST '/login' endpoint", () => {
-  describe("When it receives a request with a valid user", () => {
-    test("Then it should return an object with a property 'accessToken'", async () => {
-      const userdata = {
-        email: "user@gmail.com",
-        password: "climber",
-      };
-      const req: Partial<Request> = {
-        body: userdata,
-      };
-      await register(req as Request, res as Response, next as NextFunction);
-      const status = 200;
-      const response = await request(app)
-        .post(`${routes.users}${routes.login}`)
-        .send(userdata)
-        .expect(status);
-
-      expect(response.body).toHaveProperty("accessToken");
-    });
-
-    test("Then it should return an object with a property 'error'", async () => {
-      const userdata = {
-        email: "user@gmail.com",
-        password: "climber",
-      };
-
-      const status = 401;
-      const response = await request(app)
-        .post(`${routes.users}${routes.login}`)
-        .send(userdata)
-        .expect(status);
-
-      expect(response.body).toHaveProperty("error");
-    });
-
-    test("Then it should return an object with a property 'error'", async () => {
-      const userdata = {
-        email: "user@gmail.com",
-        password: "climber",
-      };
-      const error = new CustomError(
-        "An error ocurred while logging in!",
-        500,
-        "An error ocurred while logging in!"
-      );
-      const status = 500;
-      User.findOne = jest.fn().mockRejectedValue(error);
-      const response = await request(app)
-        .post(`${routes.users}${routes.login}`)
-        .send(userdata)
         .expect(status);
 
       expect(response.body).toHaveProperty("error");

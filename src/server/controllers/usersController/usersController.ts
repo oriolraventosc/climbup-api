@@ -30,9 +30,12 @@ export const register = async (
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ name, email, password: hashedPassword });
+    const newUser = await User.create({
+      email,
+      password: hashedPassword,
+    });
 
-    res.status(201).json({ name, email, password: hashedPassword });
+    res.status(201).json({ newUser });
     debug(chalk.blueBright(`User ${name} created succesfully!`));
   } catch {
     const error = new CustomError(
