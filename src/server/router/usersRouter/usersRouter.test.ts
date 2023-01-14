@@ -126,9 +126,7 @@ describe("Given a POST '/login' endpoint", () => {
       const req: Partial<Request> = {
         body: userdata,
       };
-
       await register(req as Request, res as Response, next as NextFunction);
-
       const status = 200;
       const response = await request(app)
         .post(`${routes.users}${routes.login}`)

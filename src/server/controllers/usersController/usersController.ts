@@ -50,6 +50,15 @@ export const login = async (
   next: NextFunction
 ) => {
   const { email, password } = req.body as UserStructure;
+  if (!email || !password) {
+    const customError = new CustomError(
+      "Missing credentials",
+      401,
+      "Missing credentials"
+    );
+    next(customError);
+    return;
+  }
 
   try {
     const user = await User.findOne({ email });
