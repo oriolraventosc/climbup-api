@@ -30,9 +30,12 @@ export const register = async (
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ name, email, password: hashedPassword });
+    const newUser = await User.create({
+      email,
+      password: hashedPassword,
+    });
 
-    res.status(201).json({ name, email, password: hashedPassword });
+    res.status(201).json({ newUser });
     debug(chalk.blueBright(`User ${name} created succesfully!`));
   } catch {
     const error = new CustomError(
@@ -50,6 +53,15 @@ export const login = async (
   next: NextFunction
 ) => {
   const { email, password } = req.body as UserStructure;
+  if (!email || !password) {
+    const customError = new CustomError(
+      "Missing credentials",
+      401,
+      "Missing credentials"
+    );
+    next(customError);
+    return;
+  }
 
   try {
     const user = await User.findOne({ email });
