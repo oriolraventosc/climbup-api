@@ -33,6 +33,7 @@ describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
 
       const response = await request(app)
         .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
+        .query({ installation: "", activity: "", location: "" })
         .expect(status);
 
       expect(response.body).toHaveProperty("climbingWalls");
@@ -46,6 +47,7 @@ describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
 
       const response = await request(app)
         .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
+        .query({ installation: "", activity: "", location: "" })
         .expect(status);
 
       expect(response.body).toHaveProperty("climbingWalls", []);
@@ -65,6 +67,7 @@ describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
 
       const response = await request(app)
         .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
+        .query({ installation: "", activity: "", location: "" })
         .expect(status);
 
       expect(response.body).toHaveProperty("error");
