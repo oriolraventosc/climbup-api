@@ -10,3 +10,9 @@ export interface UserTokenPayload extends JwtPayload {
   id: string;
   email: string;
 }
+
+export interface ClimbingWallFilters {
+  installations: string;
+  activities: string;
+  location: string;
+}
