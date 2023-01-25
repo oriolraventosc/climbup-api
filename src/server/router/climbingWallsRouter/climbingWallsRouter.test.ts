@@ -27,7 +27,7 @@ afterAll(async () => {
 
 describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
   describe("When it receives a request and there is 1 climbing wall in the data base", () => {
-    test.only("Then it should return 'Drac de Pedra'", async () => {
+    test("Then it should return 'Drac de Pedra'", async () => {
       const status = 200;
       ClimbingWall.find = jest.fn().mockReturnValue(climbingWallMock);
 
@@ -68,6 +68,43 @@ describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
       const response = await request(app)
         .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
         .query({ installation: "", activity: "", location: "", limit: 6 })
+        .expect(status);
+
+      expect(response.body).toHaveProperty("error");
+    });
+  });
+});
+
+describe("Given a GET '/loadClimbingWall' endpoint", () => {
+  describe("When it receives a request with a id param '12345678910'", () => {
+    test("Then it should return an object with a property climbingWall", async () => {
+      const status = 200;
+      ClimbingWall.findById = jest.fn().mockReturnValue({
+        privateClimbingWalls: [],
+        climbingWalls: [],
+        climbingWall: climbingWallMock,
+      });
+
+      const response = await request(app)
+        .get(`${routes.climbingWalls}${routes.loadClimbingWall}`)
+        .expect(status);
+
+      expect(response.body).toHaveProperty("climbingWall");
+    });
+  });
+
+  describe("When it receives a request without a id param", () => {
+    test("Then it should return an object with a property climbingWall", async () => {
+      const status = 500;
+      const error = new CustomError(
+        "We couldn't find any climbing wall due to an internal server error",
+        500,
+        "We couldn't find any climbing wall due to an internal server error"
+      );
+      ClimbingWall.findById = jest.fn().mockRejectedValue(error);
+
+      const response = await request(app)
+        .get(`${routes.climbingWalls}${routes.loadClimbingWall}`)
         .expect(status);
 
       expect(response.body).toHaveProperty("error");
