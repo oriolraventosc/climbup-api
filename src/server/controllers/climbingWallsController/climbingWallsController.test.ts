@@ -14,7 +14,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
   describe("When it has 1 climbing wall", () => {
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { installation: "Cafeteria", activity: "", location: "" },
+        query: {
+          installation: "Cafeteria",
+          activity: "",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -31,7 +36,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", installation: "", location: "" },
+        query: {
+          activity: "Grupos",
+          installation: "",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -48,7 +58,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", installation: "Cafeteria", location: "" },
+        query: {
+          activity: "Grupos",
+          installation: "Cafeteria",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -65,7 +80,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", location: "Rubí", installation: "" },
+        query: {
+          activity: "Grupos",
+          location: "Rubí",
+          installation: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -82,7 +102,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { installation: "Cafeteria", location: "Rubí", activity: "" },
+        query: {
+          installation: "Cafeteria",
+          location: "Rubí",
+          activity: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -103,6 +128,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
           activity: "Grupos",
           installation: "Cafeteria",
           location: "Rubí",
+          limit: "6",
         },
       };
       const status = 200;
@@ -120,7 +146,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { location: "Rubí", activity: "", installation: "" },
+        query: { location: "Rubí", activity: "", installation: "", limit: "6" },
       };
       const status = 200;
 
@@ -139,7 +165,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
   describe("When it has 0 climbing walls", () => {
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { installation: "Cafeteria", activity: "", location: "" },
+        query: {
+          installation: "Cafeteria",
+          activity: "",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -160,7 +191,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", installation: "", location: "" },
+        query: {
+          activity: "Grupos",
+          installation: "",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -181,7 +217,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", installation: "Cafeteria", location: "" },
+        query: {
+          activity: "Grupos",
+          installation: "Cafeteria",
+          location: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -202,7 +243,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { activity: "Grupos", location: "Rubí", installation: "" },
+        query: {
+          activity: "Grupos",
+          location: "Rubí",
+          installation: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -223,7 +269,12 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { installation: "Cafeteria", location: "Rubí", activity: "" },
+        query: {
+          installation: "Cafeteria",
+          location: "Rubí",
+          activity: "",
+          limit: "6",
+        },
       };
       const status = 200;
 
@@ -248,6 +299,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
           activity: "Grupos",
           installation: "Cafeteria",
           location: "Rubí",
+          limit: "6",
         },
       };
       const status = 200;
@@ -269,7 +321,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
 
     test("Then it should return a 200 status", async () => {
       const req: Partial<Request> = {
-        query: { location: "Rubí", activity: "", installation: "" },
+        query: { location: "Rubí", activity: "", installation: "", limit: "6" },
       };
       const status = 200;
 
@@ -292,7 +344,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
   describe("When a internal server error happens", () => {
     test("Then it should call it's next method with an error", async () => {
       const req: Partial<Request> = {
-        query: { location: "", installation: "", activity: "" },
+        query: { location: "", installation: "", activity: "", limit: "6" },
       };
       const error = new CustomError(
         "We couldn't load any climbing wall due to an internal server error",

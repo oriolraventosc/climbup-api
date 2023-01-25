@@ -4,6 +4,7 @@ import debugCreator from "debug";
 import ClimbingWall from "../../../database/models/climbingWalls/climbingWalls.js";
 import CustomError from "../../customError/customError.js";
 import routes from "../../routes/routes.js";
+import pagination from "../../../utils/pagination.js";
 
 const debug = debugCreator(`${routes.debug}climbingWalls controller:`);
 
@@ -13,7 +14,8 @@ export const loadAllClimbingWalls = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { activity, installation, location } = req.query;
+  const { activity, installation, location, limit } = req.query;
+  const limitNumber = limit || 6;
   try {
     if (activity === "" && installation !== "" && location === "") {
       const climbingWalls = await ClimbingWall.find({
@@ -32,7 +34,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -55,7 +57,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -79,7 +81,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -89,10 +91,10 @@ export const loadAllClimbingWalls = async (
       const climbingWalls = await ClimbingWall.find();
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
-      debug(chalk.blueBright(`0 climbing walls found!`));
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
     }
 
     if (activity === "" && installation !== "" && location !== "") {
@@ -113,7 +115,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -137,7 +139,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -162,7 +164,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
@@ -185,7 +187,7 @@ export const loadAllClimbingWalls = async (
 
       res.status(200).json({
         privateClimbingWalls: [],
-        climbingWalls,
+        climbingWalls: pagination(climbingWalls, Number(limitNumber)),
         climbingWall: {},
       });
       debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
