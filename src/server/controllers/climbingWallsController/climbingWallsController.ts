@@ -201,3 +201,34 @@ export const loadAllClimbingWalls = async (
     next(error);
   }
 };
+
+export const loadClimbingWall = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  if (!id) {
+    const error = new CustomError(
+      "There is no climbing wall",
+      400,
+      "There is no climbing wall"
+    );
+    next(error);
+  }
+
+  try {
+    const climbingWall = await ClimbingWall.findById(id);
+    res
+      .status(200)
+      .json({ privateClimbingWalls: [], climbingWalls: [], climbingWall });
+    debug(chalk.blueBright(`${climbingWall.name} climbing wall found!`));
+  } catch {
+    const error = new CustomError(
+      "We couldn't find any climbing wall due to an internal server error",
+      500,
+      "We couldn't find any climbing wall due to an internal server error"
+    );
+    next(error);
+  }
+};

@@ -1,5 +1,6 @@
 const climbingWallMock = {
   owner: "63bc33e6b4193dbdf0f95246",
+  id: "12345678910",
   name: "Drac de Pedra",
   city: "Rubí",
   address: "Can rosés",
