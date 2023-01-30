@@ -64,6 +64,14 @@ const climbingWallSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
   },
+  lat: {
+    type: Number,
+    required: false,
+  },
+  lng: {
+    type: Number,
+    required: false,
+  },
 });
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
