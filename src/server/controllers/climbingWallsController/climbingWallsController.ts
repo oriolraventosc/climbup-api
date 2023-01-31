@@ -232,3 +232,36 @@ export const loadClimbingWall = async (
     next(error);
   }
 };
+
+export const loadUserClimbingWalls = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { userId } = req.params;
+  console.log("hola");
+  if (!userId) {
+    const error = new CustomError(
+      "You must provide a userId",
+      400,
+      "You must provide a userId"
+    );
+    next(error);
+    return;
+  }
+
+  try {
+    const climbingWalls = await ClimbingWall.find({
+      owner: "63c1aaf5a6eb84d57beb72b7",
+    });
+    res.status(200).json(climbingWalls);
+    debug(chalk(`You have ${climbingWalls.length} climbing walls!`));
+  } catch {
+    const error = new CustomError(
+      "Error loading your climbing walls",
+      400,
+      "Error loading your climbing walls"
+    );
+    next(error);
+  }
+};
