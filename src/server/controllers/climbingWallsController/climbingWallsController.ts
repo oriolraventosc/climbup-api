@@ -233,33 +233,203 @@ export const loadClimbingWall = async (
   }
 };
 
+// eslint-disable-next-line complexity
 export const loadUserClimbingWalls = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const { userId } = req.params;
-  console.log("hola");
-  if (!userId) {
-    const error = new CustomError(
-      "You must provide a userId",
-      400,
-      "You must provide a userId"
-    );
-    next(error);
-    return;
-  }
+  const { activity, installation, location, limit } = req.query;
 
   try {
-    const climbingWalls = await ClimbingWall.find({
-      owner: "63c1aaf5a6eb84d57beb72b7",
-    });
-    res.status(200).json(climbingWalls);
-    debug(chalk(`You have ${climbingWalls.length} climbing walls!`));
+    const limitNumber = limit || 6;
+    if (activity === "" && installation !== "" && location === "") {
+      const climbingWalls = await ClimbingWall.find({
+        installations: installation,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity !== "" && installation === "" && location === "") {
+      const climbingWalls = await ClimbingWall.find({
+        activities: activity,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity !== "" && installation !== "" && location === "") {
+      const climbingWalls = await ClimbingWall.find({
+        activities: activity,
+        installations: installation,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity === "" && installation === "" && location === "") {
+      const climbingWalls = await ClimbingWall.find({ owner: userId });
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity === "" && installation !== "" && location !== "") {
+      const climbingWalls = await ClimbingWall.find({
+        installations: installation,
+        city: location,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity !== "" && installation === "" && location !== "") {
+      const climbingWalls = await ClimbingWall.find({
+        owner: userId,
+        activities: activity,
+        city: location,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity !== "" && installation !== "" && location !== "") {
+      const climbingWalls = await ClimbingWall.find({
+        activities: activity,
+        installations: installation,
+        city: location,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
+
+    if (activity === "" && installation === "" && location !== "") {
+      const climbingWalls = await ClimbingWall.find({
+        city: location,
+        owner: userId,
+      });
+
+      if (!climbingWalls) {
+        res.status(200).json({
+          privateClimbingWalls: [],
+          climbingWalls: [],
+          climbingWall: {},
+        });
+        debug(chalk.blueBright(`0 climbing walls found!`));
+        return;
+      }
+
+      res.status(200).json({
+        privateClimbingWalls: pagination(climbingWalls, Number(limitNumber)),
+        climbingWalls: [],
+        climbingWall: {},
+      });
+      debug(chalk.blueBright(`${climbingWalls.length} climbing walls found!`));
+    }
   } catch {
     const error = new CustomError(
       "Error loading your climbing walls",
-      400,
+      500,
       "Error loading your climbing walls"
     );
     next(error);

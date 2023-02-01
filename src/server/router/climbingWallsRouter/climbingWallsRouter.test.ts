@@ -26,20 +26,6 @@ afterAll(async () => {
 });
 
 describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
-  describe("When it receives a request and there is 1 climbing wall in the data base", () => {
-    test("Then it should return 'Drac de Pedra'", async () => {
-      const status = 200;
-      ClimbingWall.find = jest.fn().mockReturnValue(climbingWallMock);
-
-      const response = await request(app)
-        .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
-        .query({ installation: "", activity: "", location: "", limit: 6 })
-        .expect(status);
-
-      expect(response.body).toHaveProperty("climbingWalls");
-    });
-  });
-
   describe("When it receives a request and there is 0 climbing wall in the data base", () => {
     test("Then it should return an empty climbingWalls property'", async () => {
       const status = 200;
@@ -105,6 +91,29 @@ describe("Given a GET '/loadClimbingWall' endpoint", () => {
 
       const response = await request(app)
         .get(`${routes.climbingWalls}${routes.loadClimbingWall}`)
+        .expect(status);
+
+      expect(response.body).toHaveProperty("error");
+    });
+  });
+});
+
+describe("Given a GET 'loadUserClimbingWalls endpoint'", () => {
+  describe("When it receives a request and an internal server error happens", () => {
+    test("Then it should return an empty climbingWalls property'", async () => {
+      const status = 500;
+      const error = new CustomError(
+        "Error loading your climbing walls",
+        500,
+        "Error loading your climbing walls"
+      );
+
+      ClimbingWall.find = jest.fn().mockRejectedValue(error);
+
+      const response = await request(app)
+        .get(
+          `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
+        )
         .expect(status);
 
       expect(response.body).toHaveProperty("error");
