@@ -7,7 +7,7 @@ const routes = {
   debug: process.env.DEBUG,
   loadClimbingWallsFiltered: "/loadClimbingWallsByLocation",
   loadClimbingWall: "/:id",
-  loadAllPrivateClimbingWalls: "/userClimbingWalls",
+  loadAllPrivateClimbingWalls: "/privateClimbingWalls/:userId",
 };
 
 export default routes;

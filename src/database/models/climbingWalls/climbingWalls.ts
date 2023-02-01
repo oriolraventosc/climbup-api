@@ -62,7 +62,7 @@ const climbingWallSchema = new Schema({
     type: String,
   },
   owner: {
-    type: Schema.Types.ObjectId,
+    type: String,
   },
   lat: {
     type: Number,
