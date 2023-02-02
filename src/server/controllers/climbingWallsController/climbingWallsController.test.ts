@@ -178,11 +178,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -204,11 +200,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -230,11 +222,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -256,11 +244,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -282,11 +266,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -308,11 +288,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -329,11 +305,7 @@ describe("Given a loadAllClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadAllClimbingWalls(
         req as Request,
@@ -603,11 +575,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -630,11 +598,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -657,11 +621,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -684,11 +644,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -711,11 +667,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -738,11 +690,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,
@@ -760,11 +708,7 @@ describe("Given a loadUserClimbingWalls controller", () => {
       };
       const status = 200;
 
-      ClimbingWall.find = jest.fn().mockReturnValue({
-        privateClimbingWalls: [],
-        climbingWalls: [],
-        climbingWall: {},
-      });
+      ClimbingWall.find = jest.fn().mockReturnValue(null);
 
       await loadUserClimbingWalls(
         req as Request,

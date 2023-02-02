@@ -26,6 +26,20 @@ afterAll(async () => {
 });
 
 describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
+  describe("When it receives a request and there is 1 climbing wall in the data base", () => {
+    test("Then it should return an object with a climbingWalls property'", async () => {
+      const status = 200;
+      ClimbingWall.find = jest.fn().mockReturnValue([climbingWallMock]);
+
+      const response = await request(app)
+        .get(`${routes.climbingWalls}${routes.loadAllClimbingWalls}`)
+        .query({ installation: "", activity: "", location: "", limit: 6 })
+        .expect(status);
+
+      expect(response.body).toHaveProperty("climbingWalls", [climbingWallMock]);
+    });
+  });
+
   describe("When it receives a request and there is 0 climbing wall in the data base", () => {
     test("Then it should return an empty climbingWalls property'", async () => {
       const status = 200;
@@ -117,6 +131,38 @@ describe("Given a GET 'loadUserClimbingWalls endpoint'", () => {
         .expect(status);
 
       expect(response.body).toHaveProperty("error");
+    });
+  });
+
+  describe("When it receives a request with a userId '63c1aaf5a6eb84d57beb72b7'", () => {
+    test("Then it should return an object with the property 'privateClimbingWalls'", async () => {
+      const status = 200;
+
+      ClimbingWall.find = jest.fn().mockReturnValue([climbingWallMock]);
+
+      const response = await request(app)
+        .get(
+          `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
+        )
+        .expect(status);
+
+      expect(response.body).toHaveProperty("privateClimbingWalls", [
+        climbingWallMock,
+      ]);
+    });
+
+    test("Then if there is no climbing wall it should return an object with the property 'privateClimbingWalls' with the value []", async () => {
+      const status = 200;
+
+      ClimbingWall.find = jest.fn().mockReturnValue([]);
+
+      const response = await request(app)
+        .get(
+          `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
+        )
+        .expect(status);
+
+      expect(response.body).toHaveProperty("privateClimbingWalls", []);
     });
   });
 });
