@@ -1,4 +1,5 @@
 import type { JwtPayload } from "jsonwebtoken";
+import type { Request } from "express";
 
 export interface UserStructure {
   email: string;
@@ -34,4 +35,13 @@ export interface ClimbingWall {
   picture2?: string;
   picture3?: string;
   picture4?: string;
+}
+
+export interface CustomRequest extends Request {
+  userId: string;
+}
+
+export interface Credentials {
+  email: string;
+  password: string;
 }

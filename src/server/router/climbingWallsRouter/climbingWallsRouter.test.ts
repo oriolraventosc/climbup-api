@@ -7,6 +7,8 @@ import CustomError from "../../customError/customError";
 import ClimbingWall from "../../../database/models/climbingWalls/climbingWalls";
 import climbingWallMock from "../../../mocks/climbingWalls/climbingWall";
 import routes from "../../routes/routes";
+import enviroment from "../../../loadEnviroment";
+import jwt from "jsonwebtoken";
 
 let server: MongoMemoryServer;
 
@@ -24,6 +26,13 @@ afterAll(async () => {
   await mongoose.disconnect();
   await server.stop();
 });
+
+const userId = 12345;
+
+const userToken = jwt.sign(
+  { email: "admin", id: userId.toString() },
+  enviroment.jwtSecretKey
+);
 
 describe("Given a GET '/loadAllClimbingWalls' endpoint", () => {
   describe("When it receives a request and there is 1 climbing wall in the data base", () => {
@@ -128,6 +137,7 @@ describe("Given a GET 'loadUserClimbingWalls endpoint'", () => {
         .get(
           `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
         )
+        .set("Authorization", `Bearer ${userToken}`)
         .expect(status);
 
       expect(response.body).toHaveProperty("error");
@@ -144,6 +154,7 @@ describe("Given a GET 'loadUserClimbingWalls endpoint'", () => {
         .get(
           `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
         )
+        .set("Authorization", `Bearer ${userToken}`)
         .expect(status);
 
       expect(response.body).toHaveProperty("privateClimbingWalls", [
@@ -160,6 +171,7 @@ describe("Given a GET 'loadUserClimbingWalls endpoint'", () => {
         .get(
           `/climbingWalls/privateClimbingWalls/63c1aaf5a6eb84d57beb72b7?limit=6&activity&installation&location`
         )
+        .set("Authorization", `Bearer ${userToken}`)
         .expect(status);
 
       expect(response.body).toHaveProperty("privateClimbingWalls", []);
